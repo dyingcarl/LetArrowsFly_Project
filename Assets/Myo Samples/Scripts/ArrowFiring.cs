@@ -47,7 +47,7 @@ public class ArrowFiring : MonoBehaviour {
             //transform.Translate(Vector3.forward);
             rigBod.useGravity = false;
             transform.Translate(new Vector3(0, 3, 0) * Time.deltaTime);
-            force += ((spawnPoint.rotation)*Vector3.forward*15 * Time.deltaTime);
+            force += (spawnPoint.rotation)*Vector3.forward*15 * Time.deltaTime);
             info.text = "POWER!" + force.x + force.y + force.z;
             flag = 2;
             //transform.Translate(position);
