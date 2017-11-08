@@ -49,14 +49,12 @@ public class JointOrientation : MonoBehaviour
 
             if (thalmicMyo.pose == Pose.FingersSpread) {
                 updateReference = true;
-                
-               // Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
                 ExtendUnlockAndNotifyUserAction(thalmicMyo);
             }
 
             else if(thalmicMyo.pose == Pose.WaveOut)
             {
-                Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                //Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
                 ExtendUnlockAndNotifyUserAction(thalmicMyo);
             }
         }

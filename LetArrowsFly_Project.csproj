@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BowController.cs" />
     <Compile Include="Assets\Myo Samples\Scripts\ArrowFiring.cs" />
     <Compile Include="Assets\Myo Samples\Scripts\ColorBoxByPose.cs" />
     <Compile Include="Assets\Myo Samples\Scripts\JointOrientation.cs" />
