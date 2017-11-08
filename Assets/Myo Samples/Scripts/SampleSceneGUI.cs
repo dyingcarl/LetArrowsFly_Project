@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 // Draw simple instructions for sample scene.
 // Check to see if a Myo armband is paired.
@@ -8,9 +9,10 @@ public class SampleSceneGUI : MonoBehaviour
     // Myo game object to connect with.
     // This object must have a ThalmicMyo script attached.
     public GameObject myo = null;
+    public Text source = null;
 
-    public float power;
-    public string text;
+    //public float power;
+    //public string text;
 
     // Draw some basic instructions.
     void OnGUI ()
@@ -21,6 +23,7 @@ public class SampleSceneGUI : MonoBehaviour
 
         // Access the ThalmicMyo script attached to the Myo object.
         ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
+        Text display = source.GetComponent<Text>();
 
         if (!hub.hubInitialized) {
             GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
@@ -37,11 +40,8 @@ public class SampleSceneGUI : MonoBehaviour
             );
         } else {
             GUI.Label (new Rect (12, 8, Screen.width, Screen.height),
-                text +
-                "Wave in: Set box material to blue\n" +
-                "Wave out: Set box material to green\n" +
-                "Double tap: Reset box material\n" +
-                "Fingers spread: Set forward direction"
+                display.text
+                
             );
 
             //GUI.Label(new Rect(12, 8, Screen.width, Screen.height),);
@@ -58,7 +58,7 @@ public class SampleSceneGUI : MonoBehaviour
             hub.ResetHub();
         }
 
-        text = TextUpdate(power);
+        //text = TextUpdate(power);
 
         
     }
