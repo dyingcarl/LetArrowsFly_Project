@@ -38,7 +38,7 @@ public class BowController : MonoBehaviour {
 
     void reload(GameObject toLoad)
     {
-        Instantiate(bullet, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        Instantiate(bullet, spawnPoint.transform.position, spawnPoint.transform.rotation,spawnPoint.transform);
 
     }
 }
