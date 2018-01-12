@@ -16,8 +16,8 @@ public class JointOrientation : MonoBehaviour
     // This object must have a ThalmicMyo script attached.
     public GameObject myo = null;
     //public GameObject Arrow = null;
-    public GameObject bullet = null;
-    public Transform spawnPoint;
+    //public GameObject bullet = null;
+    //public Transform spawnPoint;
 
     // A rotation that compensates for the Myo armband's orientation parallel to the ground, i.e. yaw.
     // Once set, the direction the Myo armband is facing becomes "forward" within the program.

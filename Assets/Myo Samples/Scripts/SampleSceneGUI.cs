@@ -9,7 +9,7 @@ public class SampleSceneGUI : MonoBehaviour
     // Myo game object to connect with.
     // This object must have a ThalmicMyo script attached.
     public GameObject myo = null;
-    public Text source = null;
+    public Text source;
 
     //public float power;
     //public string text;

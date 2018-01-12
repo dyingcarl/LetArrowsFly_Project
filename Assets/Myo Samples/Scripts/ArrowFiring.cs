@@ -28,6 +28,9 @@ public class ArrowFiring : MonoBehaviour {
     private Vector3 force = new Vector3(0, 0, 0);
     //private Vector3 displacement = new Vector3(0, 0, 0);
     private Vector3 direction = new Vector3(0, 0, 2);
+    public Vector3 bullectSize;
+    public Vector3 originalSize = new Vector3(1, 1, 1);
+    public float growth;
   
 
     // Update is called once per frame
@@ -49,6 +52,11 @@ public class ArrowFiring : MonoBehaviour {
         thalmicMyo = myo.GetComponent<ThalmicMyo>();
         rigBod = GetComponent<Rigidbody>();
         transform.rotation = spawnPoint.rotation;
+        //originalSize = transform.localScale;
+        //bullectSize.x += transform.localScale.x * growth;
+        //bullectSize.y += transform.localScale.y * growth;
+        //bullectSize.z += transform.localScale.z * growth;
+        //transform.localScale = bullectSize;
         //transform.position = spawnPoint.position;// + displacement;
         //Vector3 direction = new Vector3(spawnPoint.transform.forward.x, 0, spawnPoint.transform.forward.z);
         //Vector3 direction = new Vector3(0,0,2);
@@ -56,13 +64,18 @@ public class ArrowFiring : MonoBehaviour {
 
         if (thalmicMyo.pose == Pose.Fist && (flag == 1 || flag == 2))
         {
+            bullectSize = transform.localScale;
+            bullectSize.x += growth;
+            bullectSize.y += growth;
+            bullectSize.z += growth;
+            transform.localScale = bullectSize;
             //powerNum++;
             //transform.Translate(Vector3.forward);
             rigBod.useGravity = false;
             transform.Translate(new Vector3(0, 3, 0) * Time.deltaTime);
             //displacement += new Vector3(0, 0, 3) * Time.deltaTime;
             force += (direction * powerNum * Time.deltaTime);
-            info.text = "POWER!" + " \n" + force.x + " \n" + force.y + " \n" + force.z;
+            info.text = "POWER!" + " \n" + originalSize.x + " \n" + originalSize.y + " \n" + originalSize.z;
             flag = 2;
             //transform.Translate(position);
         }
@@ -82,6 +95,7 @@ public class ArrowFiring : MonoBehaviour {
             flag = 0;
             rigBod.AddForce(force);
             rigBod.useGravity = true;
+            transform.localScale = originalSize;
             info.text = "Shoot!" + " x: " + force.x + " y: " + force.y + " z: " + force.z;
         }
     }
