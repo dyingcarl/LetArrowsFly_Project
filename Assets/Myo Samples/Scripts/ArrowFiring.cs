@@ -13,6 +13,7 @@ public class ArrowFiring : MonoBehaviour {
 
     // Use this for initialization
     public int powerNum = 50;
+    public Text testdata = null;
     public Text info = null;
     public GameObject myo = null;
     public GameObject head = null;
@@ -52,38 +53,21 @@ public class ArrowFiring : MonoBehaviour {
         thalmicMyo = myo.GetComponent<ThalmicMyo>();
         rigBod = GetComponent<Rigidbody>();
         transform.rotation = spawnPoint.rotation;
-        //originalSize = transform.localScale;
-        //bullectSize.x += transform.localScale.x * growth;
-        //bullectSize.y += transform.localScale.y * growth;
-        //bullectSize.z += transform.localScale.z * growth;
-        //transform.localScale = bullectSize;
-        //transform.position = spawnPoint.position;// + displacement;
-        //Vector3 direction = new Vector3(spawnPoint.transform.forward.x, 0, spawnPoint.transform.forward.z);
-        //Vector3 direction = new Vector3(0,0,2);
         direction = head.transform.position - Redirect.position;
+
+        RawReadings();
+
 
         if (thalmicMyo.pose == Pose.Fist && (flag == 1 || flag == 2))
         {
-            bullectSize = transform.localScale;
-            bullectSize.x += growth;
-            bullectSize.y += growth;
-            bullectSize.z += growth;
-            transform.localScale = bullectSize;
-            //powerNum++;
-            //transform.Translate(Vector3.forward);
             rigBod.useGravity = false;
             transform.Translate(new Vector3(0, 3, 0) * Time.deltaTime);
-            //displacement += new Vector3(0, 0, 3) * Time.deltaTime;
             force += (direction * powerNum * Time.deltaTime);
-            info.text = "POWER!" + " \n" + originalSize.x + " \n" + originalSize.y + " \n" + originalSize.z;
+            info.text = "POWER!";
             flag = 2;
-            //transform.Translate(position);
+            
         }
 
-        //else if(flag == 0 && thalmicMyo.pose == Pose.WaveIn)
-       // {
-        //    Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-        //}
         else if (thalmicMyo.pose == Pose.WaveIn)
         {
             flag = 1;
@@ -96,7 +80,8 @@ public class ArrowFiring : MonoBehaviour {
             rigBod.AddForce(force);
             rigBod.useGravity = true;
             transform.localScale = originalSize;
-            info.text = "Shoot!" + " x: " + force.x + " y: " + force.y + " z: " + force.z;
+            info.text = "Shoot!";
+            // + " x: " + force.x + " y: " + force.y + " z: " + force.z
         }
     }
 
@@ -107,4 +92,17 @@ public class ArrowFiring : MonoBehaviour {
             gameObject.SetActive(false);
         }
     }
+
+    public void RawReadings()
+    {
+        testdata.text = " \nAcc x: " + thalmicMyo.accelerometer.x * 9.8
+                + " \nAcc y: " + thalmicMyo.accelerometer.y * 9.8
+                + " \nAcc z: " + thalmicMyo.accelerometer.z * 9.8
+                + " \n>>>>>>>>>><<<<<<<<<<<"
+                + " \nGyro x: " + thalmicMyo.gyroscope.x
+                + " \nGyro y: " + thalmicMyo.gyroscope.y
+                + " \nGyro z: " + thalmicMyo.gyroscope.z;
+    }
+
+    //public 
 }
