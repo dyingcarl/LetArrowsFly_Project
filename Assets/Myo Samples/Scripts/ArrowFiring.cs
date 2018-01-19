@@ -32,6 +32,7 @@ public class ArrowFiring : MonoBehaviour {
     public Vector3 bullectSize;
     public Vector3 originalSize = new Vector3(1, 1, 1);
     public float growth;
+    public double length;
   
 
     // Update is called once per frame
@@ -54,21 +55,21 @@ public class ArrowFiring : MonoBehaviour {
         rigBod = GetComponent<Rigidbody>();
         transform.rotation = spawnPoint.rotation;
         direction = head.transform.position - Redirect.position;
+        length +=  Time.deltaTime * Time.deltaTime * 0.5 * thalmicMyo.accelerometer.z;
+        //RawReadings();
 
-        RawReadings();
 
-
-        if (thalmicMyo.pose == Pose.Fist && (flag == 1 || flag == 2))
+        if (thalmicMyo.pose == Pose.Fist && (flag == 1 || flag == 2))//charging
         {
             rigBod.useGravity = false;
             transform.Translate(new Vector3(0, 3, 0) * Time.deltaTime);
             force += (direction * powerNum * Time.deltaTime);
-            info.text = "POWER!";
+            info.text = "POWER!" + length + "\n";
             flag = 2;
             
         }
-
-        else if (thalmicMyo.pose == Pose.WaveIn)
+        
+        else if (thalmicMyo.accelerometer.z > 0.7 && flag == 0)
         {
             flag = 1;
             info.text = "New Ammo!";
@@ -90,6 +91,7 @@ public class ArrowFiring : MonoBehaviour {
         if (other.gameObject.CompareTag("boundary"))
         {
             gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 

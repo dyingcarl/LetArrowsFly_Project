@@ -20,7 +20,7 @@ public class Destory : MonoBehaviour {
         {
             return;
         }
-        Destroy(other.gameObject);
+        //Destroy(other.gameObject);
         Destroy(gameObject);
     }
 
