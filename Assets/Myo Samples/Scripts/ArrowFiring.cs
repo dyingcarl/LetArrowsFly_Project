@@ -81,7 +81,7 @@ public class ArrowFiring : MonoBehaviour {
         {
             flag = 0;
             //rigBod.AddForce(force);
-            rigBod.useGravity = true;
+            //rigBod.useGravity = true;
             //transform.localScale = originalSize;
             info.text = "Shoot!";
             // + " x: " + force.x + " y: " + force.y + " z: " + force.z

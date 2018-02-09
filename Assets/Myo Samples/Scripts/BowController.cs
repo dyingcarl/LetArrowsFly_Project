@@ -18,13 +18,15 @@ public class BowController : MonoBehaviour {
 
 
     private ThalmicMyo thalmicMyo;
-    private Rigidbody ammoBody;
-    private GameObject currentAmmo;
+    public Rigidbody ammoBody;
+    public GameObject currentAmmo;
     private int BowState;
+    private bool waiting;
     // Use this for initialization
     void Start () {
         thalmicMyo = myo.GetComponent<ThalmicMyo>();
         BowState = 1;
+        waiting = true;
     }
 	
 	// Update is called once per frame
@@ -41,18 +43,21 @@ public class BowController : MonoBehaviour {
             testmsg("arrow refill\n");
         }
 
-        else if((BowState == 1) && (thalmicMyo.pose == Pose.Fist))
+        else if(BowState == 1)
         {
-           // BowState = 2;
-            testmsg("pulling string\n");
-        }
-
-        else if((BowState == 1) && (thalmicMyo.pose != Pose.Fist))
-        {
-            ammoBody.AddForce(0,10,0);
-            ammoBody.useGravity = true;
-            BowState = 0;
-            testmsg("FIRRRREEEEEE\n");
+            if (thalmicMyo.pose == Pose.Fist)
+            {
+                testmsg("pulling string\n");
+                waiting = false;
+            }
+            else if(waiting == false)
+            {
+                ammoBody.AddForce(0, 0, 140);
+                ammoBody.useGravity = true;
+                waiting = true;
+                BowState = 0;
+                testmsg("FIRRRREEEEEE\n");
+            }
         }
 	}
 
