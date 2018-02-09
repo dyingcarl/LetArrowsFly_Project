@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +11,10 @@ using UnlockType = Thalmic.Myo.UnlockType;
 using VibrationType = Thalmic.Myo.VibrationType;
 
 public class ArrowFiring : MonoBehaviour {
-
+    //public GameObject gameController;
     // Use this for initialization
     public int powerNum = 50;
-    public Text testdata = null;
+    //public Text testdata = null;
     public Text info = null;
     public GameObject myo = null;
     public GameObject head = null;
@@ -29,6 +30,7 @@ public class ArrowFiring : MonoBehaviour {
     private Vector3 force = new Vector3(0, 0, 0);
     //private Vector3 displacement = new Vector3(0, 0, 0);
     private Vector3 direction = new Vector3(0, 0, 2);
+    private double AccSum;
     public Vector3 bullectSize;
     public Vector3 originalSize = new Vector3(1, 1, 1);
     public float growth;
@@ -37,25 +39,25 @@ public class ArrowFiring : MonoBehaviour {
 
     // Update is called once per frame
     void Start () {
+        //gameController.state = 0;
         thalmicMyo = myo.GetComponent<ThalmicMyo>();
         rigBod = GetComponent<Rigidbody>();
         rigBod.useGravity = false;
         info.text = "Welcome, archer.";
         flag = 1;
-        //enabled = false;
-
-
         //else if(thalmicMyo.pose == Pose.Rest)
     }
 
     private void FixedUpdate()
     {
-
+        
         thalmicMyo = myo.GetComponent<ThalmicMyo>();
         rigBod = GetComponent<Rigidbody>();
         transform.rotation = spawnPoint.rotation;
         direction = head.transform.position - Redirect.position;
-        length +=  Time.deltaTime * Time.deltaTime * 0.5 * thalmicMyo.accelerometer.z;
+        AccSum = Mathf.Abs(Mathf.Pow(thalmicMyo.accelerometer.x,2) + Mathf.Pow(thalmicMyo.accelerometer.y, 2) + Mathf.Pow(thalmicMyo.accelerometer.z, 2) - 1);
+    
+        length += Mathf.Pow(Time.deltaTime,2) * 0.5 * AccSum;
         //RawReadings();
 
 
@@ -78,33 +80,33 @@ public class ArrowFiring : MonoBehaviour {
         else if (flag == 2)
         {
             flag = 0;
-            rigBod.AddForce(force);
+            //rigBod.AddForce(force);
             rigBod.useGravity = true;
-            transform.localScale = originalSize;
+            //transform.localScale = originalSize;
             info.text = "Shoot!";
             // + " x: " + force.x + " y: " + force.y + " z: " + force.z
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("boundary"))
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("boundary"))
+    //    {
+    //        gameObject.SetActive(false);
+    //        Destroy(gameObject);
+    //    }
+    //}
 
-    public void RawReadings()
-    {
-        testdata.text = " \nAcc x: " + thalmicMyo.accelerometer.x * 9.8
-                + " \nAcc y: " + thalmicMyo.accelerometer.y * 9.8
-                + " \nAcc z: " + thalmicMyo.accelerometer.z * 9.8
-                + " \n>>>>>>>>>><<<<<<<<<<<"
-                + " \nGyro x: " + thalmicMyo.gyroscope.x
-                + " \nGyro y: " + thalmicMyo.gyroscope.y
-                + " \nGyro z: " + thalmicMyo.gyroscope.z;
-    }
+    //public void RawReadings()
+    //{
+    //    testdata.text = " \nAcc x: " + thalmicMyo.accelerometer.x * 9.8
+    //            + " \nAcc y: " + thalmicMyo.accelerometer.y * 9.8
+    //            + " \nAcc z: " + thalmicMyo.accelerometer.z * 9.8
+    //            + " \n>>>>>>>>>><<<<<<<<<<<"
+    //            + " \nGyro x: " + thalmicMyo.gyroscope.x
+    //            + " \nGyro y: " + thalmicMyo.gyroscope.y
+    //            + " \nGyro z: " + thalmicMyo.gyroscope.z;
+    //}
 
     //public 
 }
