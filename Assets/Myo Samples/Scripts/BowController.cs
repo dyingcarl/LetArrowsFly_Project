@@ -52,8 +52,9 @@ public class BowController : MonoBehaviour {
             }
             else if(waiting == false)
             {
-                ammoBody.AddForce(0, 0, 140);
+                //ammoBody.AddForce(0, 0, 140);
                 ammoBody.useGravity = true;
+                currentAmmo.transform.parent = null;
                 waiting = true;
                 BowState = 0;
                 testmsg("FIRRRREEEEEE\n");

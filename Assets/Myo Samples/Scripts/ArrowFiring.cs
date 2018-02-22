@@ -53,7 +53,7 @@ public class ArrowFiring : MonoBehaviour {
         
         thalmicMyo = myo.GetComponent<ThalmicMyo>();
         rigBod = GetComponent<Rigidbody>();
-        transform.rotation = spawnPoint.rotation;
+        //transform.rotation = spawnPoint.rotation;
         direction = head.transform.position - Redirect.position;
         AccSum = Mathf.Abs(Mathf.Pow(thalmicMyo.accelerometer.x,2) + Mathf.Pow(thalmicMyo.accelerometer.y, 2) + Mathf.Pow(thalmicMyo.accelerometer.z, 2) - 1);
     
@@ -80,7 +80,7 @@ public class ArrowFiring : MonoBehaviour {
         else if (flag == 2)
         {
             flag = 0;
-            //rigBod.AddForce(force);
+            rigBod.AddForce(force);
             //rigBod.useGravity = true;
             //transform.localScale = originalSize;
             info.text = "Shoot!";
