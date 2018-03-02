@@ -31,23 +31,23 @@ public class BowController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //RawReadings();
-        if (thalmicMyo.pose == Pose.Fist)
-            testdata.text = "nothing to show State: " + BowState + "Fist";
-        else { testdata.text = "nothing to show State: " + BowState; }
+        RawReadings();
+        //if (thalmicMyo.pose == Pose.Fist)
+        //    testdata.text = "nothing to show State: " + BowState + "Fist";
+        //else { testdata.text = "nothing to show State: " + BowState; }
         if (BowState == 0 && thalmicMyo.accelerometer.z > 0.7)
         {
             reload(bullet);
             BowState = 1;
 
-            testmsg("arrow refill\n");
+            //testmsg("arrow refill\n");
         }
 
         else if(BowState == 1)
         {
             if (thalmicMyo.pose == Pose.Fist)
             {
-                testmsg("pulling string\n");
+                //testmsg("pulling string\n");
                 waiting = false;
             }
             else if(waiting == false)
@@ -57,7 +57,7 @@ public class BowController : MonoBehaviour {
                 currentAmmo.transform.parent = null;
                 waiting = true;
                 BowState = 0;
-                testmsg("FIRRRREEEEEE\n");
+                //testmsg("FIRRRREEEEEE\n");
             }
         }
 	}

@@ -13,7 +13,7 @@ using VibrationType = Thalmic.Myo.VibrationType;
 public class ArrowFiring : MonoBehaviour {
     //public GameObject gameController;
     // Use this for initialization
-    public int powerNum = 50;
+    private double powerNum = 0.3;
     //public Text testdata = null;
     public Text info = null;
     public GameObject myo = null;
@@ -28,6 +28,7 @@ public class ArrowFiring : MonoBehaviour {
     private ThalmicMyo thalmicMyo;
 
     private Vector3 force = new Vector3(0, 0, 0);
+    private float forceint;
     //private Vector3 displacement = new Vector3(0, 0, 0);
     private Vector3 direction = new Vector3(0, 0, 2);
     private double AccSum;
@@ -64,8 +65,9 @@ public class ArrowFiring : MonoBehaviour {
         if (thalmicMyo.pose == Pose.Fist && (flag == 1 || flag == 2))//charging
         {
             rigBod.useGravity = false;
-            transform.Translate(new Vector3(0, 3, 0) * Time.deltaTime);
-            force += (direction * powerNum * Time.deltaTime);
+            //transform.Translate(new Vector3(0, 3, 0) * Time.deltaTime);
+            transform.Translate(new Vector3(0, (float)0.03, 0) * (int)AccSum);
+            forceint += ((float)powerNum * (float)AccSum);
             info.text = "POWER!" + length + "\n";
             flag = 2;
             
@@ -74,16 +76,20 @@ public class ArrowFiring : MonoBehaviour {
         else if (thalmicMyo.accelerometer.z > 0.7 && flag == 0)
         {
             flag = 1;
-            info.text = "New Ammo!";
+            //info.text = forceint.ToString();
             
         }
-        else if (flag == 2)
+        else if (flag == 2 || length > 0.12)
         {
+            //length = 0;
             flag = 0;
+            force = direction * (float)length * 10000;
+            info.text = length.ToString();
+            length = 0;
             rigBod.AddForce(force);
             //rigBod.useGravity = true;
             //transform.localScale = originalSize;
-            info.text = "Shoot!";
+            //info.text = "Shoot!";
             // + " x: " + force.x + " y: " + force.y + " z: " + force.z
         }
     }

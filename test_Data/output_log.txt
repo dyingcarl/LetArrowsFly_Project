@@ -19,14 +19,14 @@ Platform assembly: F:\PCMaster\SystemFiles\Downloads\LetArrowsFly_Project-CarlTe
 Loading F:\PCMaster\SystemFiles\Downloads\LetArrowsFly_Project-CarlTest\test_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
 Platform assembly: F:\PCMaster\SystemFiles\Downloads\LetArrowsFly_Project-CarlTest\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading F:\PCMaster\SystemFiles\Downloads\LetArrowsFly_Project-CarlTest\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.192 seconds
+- Completed reload, in  0.052 seconds
 Platform assembly: F:\PCMaster\SystemFiles\Downloads\LetArrowsFly_Project-CarlTest\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: F:\PCMaster\SystemFiles\Downloads\LetArrowsFly_Project-CarlTest\test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.946248 ms
+UnloadTime: 1.989868 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 3cb8 -> priority: 1 
-  Thread -> id: 3dfc -> priority: 1 
+  Thread -> id: dc8 -> priority: 1 
+  Thread -> id: 1788 -> priority: 1 
